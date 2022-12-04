@@ -1,0 +1,11 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/MonoDI/Sample/_Sample-MonoDI.unity
+    guid: 1944ac66073bc064cabc275bf77b178a
+  m_configObjects: {}
