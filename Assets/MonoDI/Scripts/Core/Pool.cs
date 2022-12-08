@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MonoDI.Scripts.Core
 {
-    public static class Pool <T> where T : UnityEngine.Object, IPoolObject
+    public static class Pool <T> where T : class, IPoolObject
     {
         private static readonly List<T> _pool = new List<T>();
         
@@ -33,18 +33,24 @@ namespace MonoDI.Scripts.Core
         }
     }
 
-    public static class PoolWithSO<Q, T> where T : UnityEngine.Object, IPoolObject  
+    public static class PoolWithSO<Q, T> where T : class, IPoolObject  
                                          where Q : class
     {
         private static readonly List<PoolObj<Q, T>> _pool = new List<PoolObj<Q, T> >();
         
-        public static T GetFromPool(Q id, System.Action onMissing)
+        public static T GetFromPool(Q id, Func<T> onMissing)
         {
             if (_pool.Exists(_ => _.Id == id) == false)
             {
-                onMissing.Invoke();
+                return onMissing.Invoke();
             }
-            var p = _pool.Find(_ => _.Id == id).List;
+
+            var o = _pool.Find(_ => _.Id == id);
+            if (o.List == null)
+            {
+                o.List = new List<T>();
+            }
+            var p = o.List;
             
             if (p.Count == 0)
             {

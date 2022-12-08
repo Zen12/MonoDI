@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using MonoDI.Scripts.Core;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace USI.Scripts.Core.Editor
+namespace MonoDI.Scripts.Core.Editor
 {
     public class InjectionTest
     {
@@ -128,10 +127,10 @@ namespace USI.Scripts.Core.Editor
         {
             var intoInject = new GameObject().AddComponent<InToInject_Test>();
 
-            new GameObject().AddComponent<MonoDI.Scripts.Core.MonoDI>();
+            new GameObject().AddComponent<global::MonoDI.Scripts.Core.MonoDI>();
             
             //awake is not called...
-            MonoDI.Scripts.Core.MonoDI.Instance.FixDependencies(intoInject);
+            global::MonoDI.Scripts.Core.MonoDI.Instance.FixDependencies(intoInject);
 
             yield return null;
             yield return null;
@@ -140,7 +139,7 @@ namespace USI.Scripts.Core.Editor
             intoInject.IsCalled = false;
             
             //simulate OnDestroy
-            MonoDI.Scripts.Core.MonoDI.Instance.ClearAll();
+            global::MonoDI.Scripts.Core.MonoDI.Instance.ClearAll();
             
             intoInject.FireTestSignal();
             Assert.IsTrue(intoInject.IsCalled == false);

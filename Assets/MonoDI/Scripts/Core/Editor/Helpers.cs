@@ -1,7 +1,6 @@
-using MonoDI.Scripts.Core;
 using UnityEngine;
 
-namespace USI.Scripts.Core.Editor
+namespace MonoDI.Scripts.Core.Editor
 {
 
     public class ToInject_Test : MonoBehaviour, TestInterface
